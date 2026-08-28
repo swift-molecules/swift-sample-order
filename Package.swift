@@ -19,11 +19,19 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-sample.git",
+            url: "https://github.com/swift-atoms/swift-sample.git",
             branch: "main"
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-order.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-molecules/swift-order-comparison.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-comparison.git",
             branch: "main"
         ),
     ],
@@ -33,11 +41,18 @@ let package = Package(
             dependencies: [
                 .product(name: "Sample", package: "swift-sample"),
                 .product(name: "Order", package: "swift-order"),
+                .product(name: "Order Comparison", package: "swift-order-comparison"),
+                .product(name: "Comparison", package: "swift-comparison"),
             ]
         ),
         .testTarget(
             name: "Sample Order Tests",
-            dependencies: ["Sample Order"],
+            dependencies: [
+                "Sample Order",
+                .product(name: "Sample", package: "swift-sample"),
+                .product(name: "Order", package: "swift-order"),
+                .product(name: "Order Comparison", package: "swift-order-comparison"),
+            ],
             path: "Tests/Sample Order Tests"
         ),
     ],
